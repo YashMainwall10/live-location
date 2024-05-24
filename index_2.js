@@ -4,7 +4,9 @@
 let poly;
 let map;
 let pos ;
+
 const image = "https://img.icons8.com/emoji/48/airplane-emoji.png";
+
 let i = 0 ;
 let arr = [
     {"lat": 19.0896, "lng": 72.8656}, // Starting point (Mumbai)
@@ -35,13 +37,13 @@ function initMap() {
     zoom: 12,
     center: {"lat": 19.0896, "lng": 72.8656}, // Center the map on Chicago, USA.
   });
-  poly = new google.maps.Polyline({
-    strokeColor: "#000000",
-    strokeOpacity: 1.0,
-    strokeWeight: 3,
-    geodesic: true,
-  });
-  poly.setMap(map);
+  // poly = new google.maps.Polyline({
+  //   strokeColor: "#000000",
+  //   strokeOpacity: 1.0,
+  //   strokeWeight: 3,
+  //   geodesic: true,
+  // });
+  // poly.setMap(map);
   // Add a listener for the click event
 //   map.addListener("click", addLatLng);
   addLatLng()  ;
@@ -58,24 +60,24 @@ setInterval(function addLatLng() {
     // setMapOnAll(null);
 
 
-        // navigator.geolocation.getCurrentPosition(
-        //     (position) => {
-        //         pos = {
-        //             lat: position.coords.latitude,
-        //             lng: position.coords.longitude,
-        //         };
-        //         if(check){
-        //             map.setCenter(pos);
-        //             check = false ;
-        //         }
-        // })
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                if(check){
+                    map.setCenter(pos);
+                    check = false ;
+                }
+        })
             var marker =  new google.maps.Marker({
-            position: arr[i],
+            position: pos,
             title: "#" ,
             map: map,
             icon: image,
             });
-            map.setCenter(arr[i]);
+            map.setCenter(pos);
             i++ ;
             marker.setMap(map) ;
             let fun = setTimeout(()=>{
